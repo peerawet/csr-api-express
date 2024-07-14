@@ -12,9 +12,8 @@ employeesRouter.get("/get-employee-kpi", async (req, res) => {
     // Construct the query
     let { data, error } = await supabase
       .from("employees")
-      .select("*")
-      .in("department_id", departmentIds)
-
+      .select("*, departments(name, departmental_kpi)")
+      .in("department_id", departmentIds);
 
     if (error) {
       throw new Error(error.message);
