@@ -1,15 +1,8 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-import { employeesRouter } from "./routers/employeesRouter.js";
-
-
 function init() {
   dotenv.config();
 
   const app = express();
-  const port = 4000;
+  const port = process.env.PORT || 4000; // Use environment variable PORT if available
 
   app.use(cors());
   app.use(bodyParser.json());
@@ -26,14 +19,16 @@ function init() {
       limit: "35mb",
       parameterLimit: 50000,
     })
-  ),
-    app.use((err, req, res, next) => {
-      if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-        res.status(400).json({ error: "Invalid JSON payload" });
-      } else {
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-    });
+  );
+
+  app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+      res.status(400).json({ error: "Invalid JSON payload" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
