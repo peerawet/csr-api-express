@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { employeesRouter } from './routers/employeesRouter.js';
 import { departmentsRouter } from './routers/departmentsRouter.js';
-
+import { configsRouter } from './routers/configsRouter.js';
 
 function init() {
   const app = express();
@@ -18,6 +18,7 @@ function init() {
 
   app.use('/employees', employeesRouter);
   app.use('/departments', departmentsRouter);
+  app.use('/configs', configsRouter);
 
   app.use(
     bodyParser.urlencoded({
