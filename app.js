@@ -1,9 +1,7 @@
 function init() {
-  dotenv.config();
 
   const app = express();
-  const port = process.env.PORT || 4000; // Use environment variable PORT if available
-
+  const port = "https://csr-api-express.onrender.com";
   app.use(cors());
   app.use(bodyParser.json());
 
