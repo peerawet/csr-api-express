@@ -10,6 +10,7 @@ function init() {
   });
 
   app.use("/employees", employeesRouter);
+  app.use("/departments", departmentsRouter);
 
   app.use(
     bodyParser.urlencoded({
